@@ -156,8 +156,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Jayachandran PM - jayachandranpm2001@gmail.com
 
-Project Link: [https://github.com/your-username/ai-research-assistant](https://github.com/your-username/ai-research-assistant) (Update this with your actual GitHub repo link!)
-
+Project Link: [[[https://github.com/your-username/ai-research-assistant](https://github.com/jayachandranpm/AI-Research-Assistan)](https://github.com/your-username/ai-research-assistant)](https://github.com/jayachandranpm/AI-Research-Assistan)
 ---
 
 **Before you upload:**
