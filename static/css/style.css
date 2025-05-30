@@ -1,0 +1,129 @@
+/* Basic Reset & Body Style */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; line-height: 1.6; background-color: #f8f9fa; color: #343a40; padding: 15px; }
+.container { max-width: 900px; margin: 30px auto; background-color: #ffffff; padding: 25px 35px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); border: 1px solid #e9ecef; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0; }
+
+/* Header */
+header { text-align: center; margin-bottom: 30px; border-bottom: 1px solid #dee2e6; padding-bottom: 20px; }
+header h1 { color: #212529; margin-bottom: 8px; font-weight: 600; }
+header p { color: #6c757d; font-size: 1rem; }
+
+/* Search Form */
+#search-form { margin-bottom: 30px; }
+.input-group { display: flex; margin-bottom: 10px; border: 1px solid #ced4da; border-radius: 6px; overflow: hidden; transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out; }
+.input-group:focus-within { border-color: #86b7fe; box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25); }
+#query-input { flex-grow: 1; padding: 12px 15px; font-size: 1.05rem; border: none; border-radius: 0; outline: none; background-color: transparent; }
+#submit-button { display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; font-size: 1rem; font-weight: 500; background-color: #0d6efd; color: white; border: none; cursor: pointer; transition: background-color 0.2s ease; white-space: nowrap; }
+#submit-button svg { vertical-align: middle; }
+#submit-button:hover { background-color: #0b5ed7; }
+#submit-button:disabled { background-color: #6c757d; cursor: not-allowed; }
+.options { font-size: 0.9rem; color: #495057; margin-top: 15px; padding-left: 5px; }
+.options fieldset { border: none; padding: 0; margin: 0; }
+.options label { margin-right: 20px; cursor: pointer; display: inline-block; margin-bottom: 5px;}
+.options input[type="radio"] { margin-right: 5px; vertical-align: middle; }
+
+/* CSS Loader */
+.status-area { margin: 20px 0; min-height: 60px; }
+.loader-container { display: flex; flex-direction: column; align-items: center; padding: 15px; background-color: #e9ecef; border-radius: 6px; }
+.loader-bar { width: 80%; max-width: 300px; height: 8px; background-color: #ced4da; border-radius: 4px; overflow: hidden; position: relative; }
+.loader-bar::after { content: ''; position: absolute; top: 0; left: 0; height: 100%; width: 40%; background-color: #0d6efd; border-radius: 4px; animation: loading-animation 1.5s infinite linear; }
+.loader-text { margin-top: 10px; color: #495057; font-size: 0.95rem; text-align: center;}
+@keyframes loading-animation { 0% { transform: translateX(-100%); } 100% { transform: translateX(250%); } }
+
+.error { color: #dc3545; background-color: #f8d7da; border: 1px solid #f5c2c7; padding: 12px 15px; border-radius: 6px; font-weight: 500; }
+
+/* Results Area */
+.results { margin-top: 30px; border-top: 1px solid #dee2e6; padding-top: 25px; }
+.results h2 { color: #212529; margin-bottom: 15px; font-weight: 600; font-size: 1.4rem; }
+.results h3#sources-heading { margin-top: 30px; font-size: 1.2rem; color: #212529; font-weight: 600; margin-bottom: 15px;}
+
+/* Answer Content Styling */
+.answer-content { background-color: #fdfdfd; padding: 20px 25px; border: 1px solid #eef; border-radius: 6px; margin-bottom: 30px; color: #343a40; }
+.answer-content p, .answer-content ul, .answer-content ol { margin-bottom: 1em; }
+.answer-content h2 { /* Abstract, Intro etc. */ font-size: 1.6rem; margin-top: 1.8em; margin-bottom: 0.8em; padding-bottom: 5px; border-bottom: 2px solid #dee2e6; font-weight: 600; }
+.answer-content h3 { /* Subheadings */ font-size: 1.35rem; margin-top: 1.5em; margin-bottom: 0.6em; padding-bottom: 3px; border-bottom: 1px solid #eee; font-weight: 600; }
+.answer-content ul, .answer-content ol { padding-left: 25px; }
+.answer-content li { margin-bottom: 0.5em; }
+.answer-content a:not(.citation-marker) { color: #0d6efd; text-decoration: underline; }
+.answer-content a:not(.citation-marker):hover { color: #0a58ca; }
+.answer-content sup {
+    display: inline; /* Default browser behavior */
+    line-height: 0; /* Prevent sup from affecting line height */
+    white-space: nowrap;
+}
+
+/* Source List Styling */
+#sources-list { list-style: none; padding-left: 0; }
+#sources-list li { border: 1px solid #dee2e6; padding: 10px 15px; margin-bottom: 8px; border-radius: 5px; font-size: 0.9rem; line-height: 1.4; }
+#sources-list li::before { content: "[" counter(source-item) "] "; counter-increment: source-item; display: inline-block; font-weight: bold; color: #343a40; margin-right: 8px; min-width: 25px; }
+#sources-list { counter-reset: source-item; }
+#sources-list span.source-title { font-weight: 600; }
+#sources-list a.source-url { color: #0d6efd; text-decoration: none; display: inline; margin-left: 5px; font-size: 0.85rem; word-break: break-all; }
+#sources-list a.source-url:hover { text-decoration: underline; }
+/* Quick List Specific */
+#sources-list.quick-list li { background-color: #f8f9fa; }
+#sources-list.quick-list a.source-url { display: block; margin-left: 0; margin-top: 4px; }
+#sources-list.quick-list p.source-preview { color: #555; font-size: 0.85em; margin-top: 8px; margin-bottom: 0; padding-left: 10px; border-left: 3px solid #ced4da; max-height: 4.5em; overflow: hidden; line-height: 1.5; }
+/* Deep List Specific */
+#sources-list.deep-list li { background-color: transparent; border: none; padding: 2px 0;}
+#sources-list.deep-list a.source-url { display: inline; margin-left: 5px; } /* URL inline */
+#sources-list.deep-list p.source-preview { display: none; } /* Hide preview */
+
+/* Citation Markers & Popups */
+/* --- IMPROVED CITATION STYLING --- */
+/* Style the citation marker itself */
+sup a.citation-marker {
+    font-size: 0.75em;
+    vertical-align: super; /* Align with superscript baseline */
+    padding: 1px 3px;
+    background-color: #e0e7ff;
+    border-radius: 3px;
+    color: #0d6efd;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+    display: inline-block; /* Treat as a block for padding/margin */
+    line-height: 1; /* Prevent affecting main text line height */
+    white-space: nowrap; /* Keep [N] together */
+}
+
+sup a.citation-marker:hover {
+    background-color: #cddafe;
+}
+
+/* Add horizontal space ONLY between adjacent citation markers */
+sup + sup {
+    margin-left: 3px; /* Adjust spacing as needed */
+}
+
+/* General sup styling (optional but can help consistency) */
+sup {
+   vertical-align: super; /* Ensure default sup alignment */
+   line-height: 0; /* Prevent sup from affecting line height significantly */
+   /* display: inline-block; can sometimes cause layout issues, test if needed */
+}
+/* Custom Citation Popup */
+/* (Keep popup CSS as before) */
+.citation-popup { position: absolute; z-index: 1000; background-color: #fff; border: 1px solid #adb5bd; border-radius: 6px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); padding: 12px 15px; max-width: 400px; font-size: 0.9rem; line-height: 1.5; opacity: 0; visibility: hidden; transition: opacity 0.2s ease, visibility 0s linear 0.2s; color: #343a40; }
+.citation-popup.visible { opacity: 1; visibility: visible; transition: opacity 0.2s ease; }
+.citation-popup strong { display: block; font-weight: 600; margin-bottom: 5px; color: #212529; }
+.citation-popup a { color: #0d6efd; text-decoration: none; font-size: 0.85rem; word-break: break-all; display: block; margin-top: 5px; }
+.citation-popup a:hover { text-decoration: underline; }
+.citation-popup p.popup-preview { font-size: 0.85em; color: #495057; margin-top: 8px; margin-bottom: 0; max-height: 10em; overflow: auto; border-top: 1px solid #eee; padding-top: 8px; }
+
+
+/* Download Options */
+/* (Keep download options CSS as before) */
+.download-options { margin-top: 35px; padding-top: 25px; border-top: 1px dashed #ced4da; }
+.download-options h4 { margin-bottom: 15px; font-weight: 600; color: #495057; }
+.download-options button { padding: 9px 18px; margin-right: 12px; font-size: 0.9rem; font-weight: 500; color: white; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.2s ease, transform 0.1s ease; }
+.download-options button:hover { transform: translateY(-1px); } .download-options button:active { transform: translateY(0); }
+#download-docx { background-color: #0d6efd; } #download-docx:hover { background-color: #0b5ed7; }
+#download-pdf { background-color: #dc3545; } #download-pdf:hover { background-color: #bb2d3b; }
+
+/* Responsive */
+/* (Keep responsive CSS as before) */
+@media (max-width: 768px) { .container { margin: 15px; padding: 20px; } header h1 { font-size: 1.5rem; } header p { font-size: 0.95rem; } }
+@media (max-width: 600px) { .input-group { flex-direction: column; border-radius: 6px; border: none; } #query-input { border-radius: 6px 6px 0 0; margin-bottom: 0; text-align: left; border: 1px solid #ced4da; border-bottom: none; } #submit-button { border-radius: 0 0 6px 6px; width: 100%; justify-content: center; border: 1px solid #0d6efd; } .input-group:focus-within { border-color: transparent; box-shadow: none; } #query-input:focus { border-color: #86b7fe; box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25); position: relative; z-index: 2; } #submit-button:focus { outline: 2px solid #86b7fe; outline-offset: 2px; } .options { text-align: left; } .options label { display: block; margin-bottom: 8px; } .download-options button { display: block; width: 100%; margin-bottom: 10px; margin-right: 0; } .loader-bar { width: 90%; } .citation-popup { max-width: 90vw; }}
