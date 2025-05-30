@@ -156,7 +156,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Jayachandran PM - jayachandranpm2001@gmail.com
 
-Project Link: [[[https://github.com/your-username/ai-research-assistant](https://github.com/jayachandranpm/AI-Research-Assistan)](https://github.com/your-username/ai-research-assistant)](https://github.com/jayachandranpm/AI-Research-Assistan)
+Project Link: [https://github.com/your-username/ai-research-assistant](https://github.com/jayachandranpm/AI-Research-Assistant)
 ---
 
 **Before you upload:**
@@ -165,4 +165,4 @@ Project Link: [[[https://github.com/your-username/ai-research-assistant](https:/
 2.  **Create `.env.example`:** Copy your `.env` file to `.env.example` and replace your actual API keys with placeholders like `YOUR_GOOGLE_GEMINI_API_KEY`. This shows others what variables they need to set up.
 3.  **Create `LICENSE` file:** A simple text file with the MIT license text. You can find it [here](https://opensource.org/licenses/MIT).
 4.  **Add a GIF/Screenshot:** A short GIF or a few screenshots of the application in action will significantly boost its appeal on GitHub. You can replace the "See it in action!" placeholder with a link to your GIF or embed it directly.
-5.  **Update Links:** Make sure to replace `https://github.com/your-username/ai-research-assistant` with the actual URL of your repository!
+5.  **Update Links:** Make sure to replace `[https://github.com/your-username/ai-research-assistant](https://github.com/jayachandranpm/AI-Research-Assistant)` with the actual URL of your repository!
