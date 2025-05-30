@@ -1,0 +1,11 @@
+Flask
+python-dotenv
+requests
+beautifulsoup4
+duckduckgo_search
+google-generativeai  # Check for latest compatible version
+python-docx
+xhtml2pdf
+lxml
+trafilatura
+mistune # Using mistune for better Markdown->HTML
