@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Research Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- NO Popper/Tippy JS -->
+    <script defer src="{{ url_for('static', filename='js/script.js') }}"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AI Research Assistant</h1>
+            <p>Ask a question, get a synthesized answer with citations.</p>
+        </header>
+
+        <form id="search-form">
+            <div class="input-group">
+                <input type="text" id="query-input" placeholder="e.g., What are the effects of climate change on coral reefs?" required aria-label="Research query">
+                <button type="submit" id="submit-button" aria-label="Submit query">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                    </svg>
+                    <span>Ask</span>
+                </button>
+            </div>
+            <div class="options">
+                 <fieldset>
+                     <legend class="sr-only">Research Depth</legend>
+                     <label>
+                        <input type="radio" name="depth" value="quick" checked> Quick (Faster, ~7 sources)
+                    </label>
+                    <label>
+                        <input type="radio" name="depth" value="deep"> Deep Research (Slower, ~15 sources, Article Format)
+                    </label>
+                 </fieldset>
+            </div>
+        </form>
+
+        <!-- Updated Status Area -->
+        <div id="status-area" class="status-area" role="status" aria-live="polite">
+             <!-- NEW CSS Loader -->
+             <div id="loading-indicator" class="loader-container" style="display: none;">
+                 <div class="loader-bar"></div>
+                 <span class="loader-text">Researching... This may take some time.</span>
+             </div>
+             <div id="error-message" class="error" style="display: none;">
+                <!-- Error messages appear here -->
+             </div>
+        </div>
+
+        <div id="results-area" class="results" style="display: none;">
+            <h2>Synthesized Answer</h2>
+            <div id="answer-content" class="answer-content">
+                <!-- AI synthesized answer will be injected here -->
+                <!-- Popups will be added dynamically by JS -->
+            </div>
+
+            <h3 id="sources-heading" style="display: none;">Sources Cited</h3>
+            <ul id="sources-list" aria-labelledby="sources-heading">
+                <!-- Source list items will be injected here -->
+            </ul>
+
+            <div class="download-options" id="download-options" style="display: none;">
+                <h4>Download Report</h4>
+                <button id="download-docx" aria-label="Download report as DOCX">Download DOCX</button>
+                <button id="download-pdf" aria-label="Download report as PDF">Download PDF</button>
+                <input type="hidden" id="report-id-storage">
+            </div>
+        </div>
+
+    </div> <!-- /container -->
+
+    <!-- NEW: Popup Container (initially hidden) -->
+    <div id="citation-popup" class="citation-popup" role="tooltip" aria-hidden="true"></div>
+
+</body>
+</html>
