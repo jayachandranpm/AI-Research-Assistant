@@ -1,5 +1,6 @@
 # AI-Research-Assistant
 
+![Arbor answering a sourced research question](assets/arbor.jpg)
 
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -35,7 +36,7 @@ The **AI Research Assistant** is a web application designed to revolutionize how
 *   **Python 3.x:** Core programming language.
 *   **Flask:** Web framework for the application.
 *   **`google-generativeai`:** For interacting with Google Gemini API.
-*   **`duckduckgo-search`:** For web search functionality.
+*   **`ddgs`:** For web search functionality.
 *   **`requests`:** For making HTTP requests during scraping.
 *   **`bs4` (BeautifulSoup):** For HTML parsing and fallback scraping.
 *   **`trafilatura`:** For high-quality main content extraction from web pages.
@@ -80,7 +81,7 @@ To get a local copy up and running, follow these simple steps.
 3.  **Install dependencies:**
     First, ensure you have a `requirements.txt` file. If not, generate one from the existing code:
     ```bash
-    pip install Flask google-generativeai duckduckgo-search requests beautifulsoup4 trafilatura mistune python-docx xhtml2pdf python-dotenv
+    pip install Flask google-generativeai ddgs requests beautifulsoup4 trafilatura mistune python-docx xhtml2pdf python-dotenv
     # Then generate requirements.txt
     pip freeze > requirements.txt
     ```
@@ -157,12 +158,3 @@ Distributed under the MIT License. See `LICENSE` for more information.
 Jayachandran PM - jayachandranpm2001@gmail.com
 
 Project Link: https://github.com/jayachandranpm/AI-Research-Assistant
----
-
-**Before you upload:**
-
-1.  **Create `requirements.txt`:** Run `pip freeze > requirements.txt` in your activated virtual environment to generate this file with exact versions.
-2.  **Create `.env.example`:** Copy your `.env` file to `.env.example` and replace your actual API keys with placeholders like `YOUR_GOOGLE_GEMINI_API_KEY`. This shows others what variables they need to set up.
-3.  **Create `LICENSE` file:** A simple text file with the MIT license text. You can find it [here](https://opensource.org/licenses/MIT).
-4.  **Add a GIF/Screenshot:** A short GIF or a few screenshots of the application in action will significantly boost its appeal on GitHub. You can replace the "See it in action!" placeholder with a link to your GIF or embed it directly.
-5.  **Update Links:** Make sure to replace `https://github.com/jayachandranpm/AI-Research-Assistant` with the actual URL of your repository!

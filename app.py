@@ -16,7 +16,7 @@ from flask import (
 )
 from dotenv import load_dotenv
 import google.generativeai as genai
-from duckduckgo_search import DDGS
+from ddgs import DDGS
 import requests
 from bs4 import BeautifulSoup
 import trafilatura
@@ -432,7 +432,7 @@ def synthesize_with_gemini(query: str, scraped_data: list[dict], api_key: str, d
     estimated_tokens = len(prompt) / 4
     logging.info(f"Sending prompt to Gemini for '{depth}'. Estimated context: ~{estimated_tokens:.0f} tokens.")
 
-    model_name = 'gemini-2.0-flash' if depth == 'deep' else 'gemini-2.0-flash'
+    model_name = 'gemini-2.5-flash'
     max_tokens = 8192 # Keep generous
     logging.info(f"Using model: {model_name} (max_tokens={max_tokens})")
     model = genai.GenerativeModel(model_name)
