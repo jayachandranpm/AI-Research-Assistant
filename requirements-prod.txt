@@ -1,0 +1,35 @@
+# Production Requirements for Deep Search App
+# Run: pip install -r requirements-prod.txt
+
+# Core Framework
+Flask
+PyMySQL
+cryptography
+
+# AI & Search
+google-genai
+ddgs
+
+# Scraping
+requests
+beautifulsoup4
+lxml
+trafilatura
+
+# Document Export
+xhtml2pdf
+python-docx
+markdown
+
+# Markdown Parsing
+mistune
+
+# Security & Rate Limiting
+flask-limiter
+Flask-Caching
+
+# Environment
+python-dotenv
+
+# Production WSGI Server
+gunicorn

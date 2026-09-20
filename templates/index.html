@@ -1,79 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Research Assistant</title>
+    <title>Arbor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <!-- NO Popper/Tippy JS -->
     <script defer src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
-    <div class="container">
-        <header>
-            <h1>AI Research Assistant</h1>
-            <p>Ask a question, get a synthesized answer with citations.</p>
-        </header>
 
-        <form id="search-form">
-            <div class="input-group">
-                <input type="text" id="query-input" placeholder="e.g., What are the effects of climate change on coral reefs?" required aria-label="Research query">
-                <button type="submit" id="submit-button" aria-label="Submit query">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-                    </svg>
-                    <span>Ask</span>
+<body>
+    <div class="app-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-top">
+                <div class="sidebar-header-row">
+                    <div class="logo">
+                        <i class="fa-solid fa-tree"></i>
+                        <span class="logo-text">Arbor</span>
+                    </div>
+                    <button class="icon-btn sidebar-collapse-btn" id="sidebar-collapse-btn" title="Collapse Sidebar">
+                        <i class="fa-solid fa-angles-left"></i>
+                    </button>
+                </div>
+                <button class="new-chat-btn" id="new-chat-btn">
+                    <i class="fa-solid fa-plus"></i>
+                    <span class="btn-text">New Thread</span>
                 </button>
             </div>
-            <div class="options">
-                 <fieldset>
-                     <legend class="sr-only">Research Depth</legend>
-                     <label>
-                        <input type="radio" name="depth" value="quick" checked> Quick (Faster, ~7 sources)
-                    </label>
-                    <label>
-                        <input type="radio" name="depth" value="deep"> Deep Research (Slower, ~15 sources, Article Format)
-                    </label>
-                 </fieldset>
-            </div>
-        </form>
 
-        <!-- Updated Status Area -->
-        <div id="status-area" class="status-area" role="status" aria-live="polite">
-             <!-- NEW CSS Loader -->
-             <div id="loading-indicator" class="loader-container" style="display: none;">
-                 <div class="loader-bar"></div>
-                 <span class="loader-text">Researching... This may take some time.</span>
-             </div>
-             <div id="error-message" class="error" style="display: none;">
-                <!-- Error messages appear here -->
-             </div>
+            <div class="sidebar-content">
+                <div class="nav-section">
+                    <div class="nav-label">Library</div>
+                    <ul class="history-list" id="history-list">
+                        <!-- History items injected here -->
+                    </ul>
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <button class="settings-btn" id="settings-btn">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Settings</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content" id="main-content">
+            <!-- Mobile Header -->
+            <header class="mobile-header">
+                <button id="mobile-menu-btn" class="icon-btn">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <span class="mobile-logo"><i class="fa-solid fa-tree"></i> Arbor</span>
+                <button class="icon-btn placeholder"></button> <!-- Spacer -->
+            </header>
+
+            <div class="content-wrapper">
+                <!-- Search Container (Moves dynamically) -->
+                <div class="search-container centered" id="search-container">
+                    <div class="hero-text">
+                        <h1>Knowledge Rooted in Truth</h1>
+                    </div>
+
+                    <form class="search-form" id="search-form">
+                        <div class="input-wrapper">
+                            <textarea id="query-input" placeholder="Ask anything..." rows="1"></textarea>
+                            <div class="input-actions">
+                                <div class="search-mode-toggle">
+                                    <button type="button" class="mode-btn active" id="mode-quick" title="Quick Search">
+                                        <i class="fa-solid fa-bolt"></i>
+                                        <span>Quick</span>
+                                    </button>
+                                    <button type="button" class="mode-btn" id="mode-deep" title="Deep Research">
+                                        <i class="fa-solid fa-microscope"></i>
+                                        <span>Deep</span>
+                                    </button>
+                                </div>
+                                <div class="right-actions">
+                                    <!-- Removed paperclip icon as requested -->
+                                    <button type="submit" class="submit-btn" id="submit-btn" disabled>
+                                        <i class="fa-solid fa-paper-plane"></i> <!-- Changed to Paper Plane -->
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Results Area -->
+                <div class="results-area" id="results-area" style="display: none;">
+                    <!-- User Query Display -->
+                    <div class="query-display">
+                        <h2 id="display-query"></h2>
+                    </div>
+
+                    <!-- Sources Section -->
+                    <div class="section sources-section hidden" id="sources-section">
+                        <div class="section-header">
+                            <i class="fa-solid fa-align-left"></i>
+                            <span>Sources</span>
+                        </div>
+                        <div class="sources-scroll-container">
+                            <ul class="sources-list" id="sources-list">
+                                <!-- Sources injected here -->
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Answer Section -->
+                    <div class="section answer-section hidden">
+                        <div class="section-header">
+                            <i class="fa-solid fa-perplexity"></i> <!-- Using generic icon for now -->
+                            <span>Answer</span>
+                        </div>
+                        <div class="markdown-body" id="answer-content">
+                            <!-- Answer injected here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Overlay for mobile sidebar -->
+        <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Settings</h2>
+                <button class="close-modal-btn" id="close-settings-btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="settings-form" autocomplete="off" onsubmit="return false;">
+                <!-- Hidden username field for accessibility (browser password managers) -->
+                <input type="text" name="username" autocomplete="username" style="display:none" aria-hidden="true"
+                    tabindex="-1">
+                <div class="modal-body">
+                    <div class="setting-item">
+                        <label for="theme-select" class="setting-label"><i class="fa-solid fa-moon"></i>
+                            Appearance</label>
+                        <div class="setting-control">
+                            <select id="theme-select">
+                                <option value="dark">Dark</option>
+                                <option value="light">Light</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="setting-item">
+                        <label for="api-key-input" class="setting-label"><i class="fa-solid fa-key"></i> Gemini API
+                            Key</label>
+                        <input type="password" id="api-key-input" placeholder="Enter your API Key" class="setting-input"
+                            autocomplete="new-password">
+                    </div>
+                    <div class="setting-item">
+                        <label for="session-timeout-input" class="setting-label"><i
+                                class="fa-solid fa-hourglass-half"></i>
+                            Session Timeout (Minutes)</label>
+                        <input type="number" id="session-timeout-input" placeholder="60" value="60" min="1" max="1440"
+                            class="setting-input">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="save-btn" id="save-settings-btn">Save</button>
+                </div>
+            </form>
         </div>
+    </div>
 
-        <div id="results-area" class="results" style="display: none;">
-            <h2>Synthesized Answer</h2>
-            <div id="answer-content" class="answer-content">
-                <!-- AI synthesized answer will be injected here -->
-                <!-- Popups will be added dynamically by JS -->
+    <!-- Limit Reached Modal -->
+    <div id="limit-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Thread Limit Reached</h2>
+                <button class="close-modal-btn"
+                    onclick="document.getElementById('limit-modal').classList.add('hidden')"><i
+                        class="fa-solid fa-xmark"></i></button>
             </div>
-
-            <h3 id="sources-heading" style="display: none;">Sources Cited</h3>
-            <ul id="sources-list" aria-labelledby="sources-heading">
-                <!-- Source list items will be injected here -->
-            </ul>
-
-            <div class="download-options" id="download-options" style="display: none;">
-                <h4>Download Report</h4>
-                <button id="download-docx" aria-label="Download report as DOCX">Download DOCX</button>
-                <button id="download-pdf" aria-label="Download report as PDF">Download PDF</button>
-                <input type="hidden" id="report-id-storage">
+            <div class="modal-body">
+                <p>You have reached the limit of 10 messages for this thread.</p>
+                <p>Please start a new thread to continue researching.</p>
+                <button id="new-thread-limit-btn" class="primary-btn" style="width: 100%; margin-top: 1rem;"
+                    onclick="document.getElementById('new-chat-btn').click(); document.getElementById('limit-modal').classList.add('hidden');">
+                    <i class="fa-solid fa-plus"></i> Start New Thread
+                </button>
             </div>
         </div>
-
-    </div> <!-- /container -->
-
-    <!-- NEW: Popup Container (initially hidden) -->
-    <div id="citation-popup" class="citation-popup" role="tooltip" aria-hidden="true"></div>
-
+    </div>
 </body>
+
 </html>

@@ -2,10 +2,15 @@ Flask
 python-dotenv
 requests
 beautifulsoup4
-ddgs
-google-generativeai
+google-genai
+pymysql
 python-docx
 xhtml2pdf
 lxml
 trafilatura
 mistune
+ddgs
+flask-limiter
+flask-caching
+markdown
+gunicorn
