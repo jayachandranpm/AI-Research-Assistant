@@ -10,7 +10,7 @@ appsail_port = os.getenv("X_ZOHO_CATALYST_LISTEN_PORT", "5000")
 bind = os.getenv("GUNICORN_BIND", f"0.0.0.0:{appsail_port}")
 
 # Worker Configuration
-workers = int(os.getenv("GUNICORN_WORKERS", "2"))
+workers = int(os.getenv("GUNICORN_WORKERS", "1"))
 worker_class = "sync"
 timeout = 120  # Long timeout for deep searches
 keepalive = 5
