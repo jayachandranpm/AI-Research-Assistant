@@ -2079,7 +2079,8 @@ app = create_app()
 
 if __name__ == '__main__':
     # Use FLASK_ENV or FLASK_DEBUG for debug mode, default to True for local dev only
-    debug_mode = os.getenv('FLASK_DEBUG', 'True').lower() == 'true'
-    app.run(debug=debug_mode, host='0.0.0.0', port=5000)
+    debug_mode = os.getenv('FLASK_DEBUG', 'False').lower() == 'true'
+    port = int(os.getenv('X_ZOHO_CATALYST_LISTEN_PORT', os.getenv('PORT', '5000')))
+    app.run(debug=debug_mode, host='0.0.0.0', port=port)
 
 # --- END OF FILE app.py ---

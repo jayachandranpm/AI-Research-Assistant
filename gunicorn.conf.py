@@ -4,11 +4,13 @@
 import multiprocessing
 import os
 
-# Server Binding
-bind = os.getenv("GUNICORN_BIND", "0.0.0.0:5000")
+# Server Binding. AppSail allocates the listening port at runtime; retaining the
+# local fallback keeps the same command useful outside Catalyst.
+appsail_port = os.getenv("X_ZOHO_CATALYST_LISTEN_PORT", "5000")
+bind = os.getenv("GUNICORN_BIND", f"0.0.0.0:{appsail_port}")
 
 # Worker Configuration
-workers = int(os.getenv("GUNICORN_WORKERS", multiprocessing.cpu_count() * 2 + 1))
+workers = int(os.getenv("GUNICORN_WORKERS", "2"))
 worker_class = "sync"
 timeout = 120  # Long timeout for deep searches
 keepalive = 5
@@ -27,4 +29,4 @@ loglevel = os.getenv("GUNICORN_LOG_LEVEL", "info")
 proc_name = "deep-search-app"
 
 # Development vs Production
-reload = os.getenv("FLASK_ENV") != "production"
+reload = os.getenv("FLASK_ENV", "production") != "production"
